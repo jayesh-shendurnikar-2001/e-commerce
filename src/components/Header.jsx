@@ -20,8 +20,8 @@ function Header() {
         />
 
         {/* Mobile Button */}
-        <button className="md:hidden text-2xl" onClick={() => setMenu(!menu)}>
-          ☰
+        <button className="md:hidden text-2xl transition-all duration-300 ease-in-out" onClick={() => setMenu(!menu)}>
+        {menu ? "✕" : "☰"}
         </button>
 
         {/* Desktop Menu */}
@@ -49,7 +49,7 @@ function Header() {
 
       {/* Mobile Menu */}
       {menu && (
-        <div className="flex flex-col gap-4 mt-4 md:hidden items-center font-medium">
+        <div className="flex flex-col gap-4 mt-4 md:hidden items-center font-medium transition-all duration-300 ease-in-out">
           <input
             width="55%"
             type="text"
