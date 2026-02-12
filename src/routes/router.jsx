@@ -8,7 +8,17 @@ const Cart = lazy(() => import("../pages/Cart"));
 const Checkout = lazy(() => import("../pages/Checkout"));
 const NotFound = lazy(() => import("../pages/NotFound"));
 
-const Loader = () => <h2 style={{ textAlign: "center" }}>Loading...</h2>;
+const Loader = () => {
+  return (
+    <div className="flex justify-center items-center min-h-[40vh]">
+      <div className="flex space-x-2">
+        <div className="w-3 h-3 bg-emerald-500 rounded-full animate-bounce"></div>
+        <div className="w-3 h-3 bg-emerald-500 rounded-full animate-bounce [animation-delay:0.2s]"></div>
+        <div className="w-3 h-3 bg-emerald-500 rounded-full animate-bounce [animation-delay:0.4s]"></div>
+      </div>
+    </div>
+  );
+};
 
 const router = createBrowserRouter([
   {

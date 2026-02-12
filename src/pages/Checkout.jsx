@@ -3,6 +3,8 @@ import { useNavigate } from "react-router-dom";
 import { clearCart } from "../features/cart/cartSlice";
 import { selectCartItems, selectCartTotal } from "../features/cart/cartSelectors";
 import { useState } from "react";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function Checkout() {
   const dispatch = useDispatch();
@@ -14,7 +16,19 @@ function Checkout() {
 
   const placeOrder = (e) => {
     e.preventDefault();
+
+    if (items.length === 0) {
+      toast.error("Your cart is empty!");
+      return;
+    }
+
     setOrdered(true);
+    
+    toast.success("🎉 Order placed successfully!", {
+      position: "top-center",
+      autoClose: 2000,
+    });
+
     dispatch(clearCart());
 
     setTimeout(() => {
@@ -24,17 +38,13 @@ function Checkout() {
 
   return (
     <div className="min-h-screen bg-gray-100 py-10 px-4">
+      <ToastContainer />
+
       <div className="max-w-5xl mx-auto bg-white shadow-xl rounded-2xl p-6 md:p-10">
         
         <h2 className="text-3xl font-bold text-gray-800 mb-6 text-center">
           Checkout
         </h2>
-
-        {ordered && (
-          <p className="mb-6 text-green-600 font-semibold text-center">
-            ✅ Order placed successfully!
-          </p>
-        )}
 
         <div className="grid md:grid-cols-2 gap-8">
           

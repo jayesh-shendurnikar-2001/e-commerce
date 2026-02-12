@@ -48,7 +48,7 @@ function Header() {
                 after:absolute after:left-0 after:-bottom-1
                 after:h-[2px] after:w-0 after:bg-black
                 after:transition-all after:duration-300
-                hover:after:w-full hover:text-black" to="/cart">Cart ({cartCount})</Link>
+                hover:after:w-full hover:text-black" to="/cart">Cart <span className="text-red-600">({cartCount})</span></Link>
             </li>
           </ul>
 
@@ -68,7 +68,9 @@ function Header() {
               type="text"
               onChange={handleSearch}
               placeholder="Search products..."
-              className="border rounded-full px-4 py-2 w-full text-center text-black"
+              className="md:block border border-white rounded-full px-4 py-2 w-1/3 text-center bg-blue-300
+             focus:outline-none focus:ring-2 focus:ring-white focus:bg-white text-black w-[55%]
+             transition duration-200"
             />
 
             <Link to="/" onClick={() => setMenu(false)}>
@@ -76,7 +78,7 @@ function Header() {
             </Link>
 
             <Link to="/cart" onClick={() => setMenu(false)}>
-              Cart ({cartCount})
+              Cart <span className="text-red-500">({cartCount})</span>
             </Link>
           </div>
         )}
