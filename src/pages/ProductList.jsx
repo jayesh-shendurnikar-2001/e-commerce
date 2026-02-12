@@ -4,7 +4,7 @@ import ProductItem from "../components/ProductItem";
 import useFetchProducts from "../hooks/useFetchProducts";
 
 function ProductList() {
-  const { products, loading, error } = useFetchProducts();
+  const { products, error } = useFetchProducts();
   const [visibleCount, setVisibleCount] = useState(16);
 
   const search = useSelector((state) => state.cart.search);
