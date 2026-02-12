@@ -27,12 +27,13 @@ function ProductDetail() {
       </div>
     );
 
-  if (!product)
-    return (
-      <div className="min-h-[60vh] flex items-center justify-center">
-        <p className="text-gray-600 font-medium">Loading product...</p>
-      </div>
-    );
+    if (!product)
+      return (
+        <div className="min-h-[60vh] flex items-center justify-center">
+          <div className="w-10 h-10 border-4 border-emerald-500 border-t-transparent rounded-full animate-spin"></div>
+        </div>
+      );
+    
 
   return (
     <div className="max-w-6xl mx-auto px-4 py-10">
