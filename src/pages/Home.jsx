@@ -3,7 +3,7 @@ import ProductList from "./ProductList";
 function Home() {
   return (
     <section>
-      <h2 className="page-title">Products</h2>
+      <h2 className="text-center text-2xl">Products</h2>
       <ProductList />
     </section>
   );

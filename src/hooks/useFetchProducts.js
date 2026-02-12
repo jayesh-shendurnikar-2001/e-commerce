@@ -15,7 +15,7 @@ const useFetchProducts = () => {
   useEffect(() => {
     let isMounted = true;
 
-    fetch("https://dummyjson.com/products")
+    fetch("https://dummyjson.com/products?limit=100")
       .then((res) => {
         if (!res.ok) {
           throw new Error("Failed to fetch products");
