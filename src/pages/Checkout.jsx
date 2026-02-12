@@ -17,7 +17,9 @@ function Checkout() {
     setOrdered(true);
     dispatch(clearCart());
 
- 
+    setTimeout(() => {
+      navigate("/");
+    }, 2000);
   };
 
   return (
