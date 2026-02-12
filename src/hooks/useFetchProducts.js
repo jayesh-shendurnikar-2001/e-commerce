@@ -4,7 +4,6 @@ import { useEffect, useState } from "react";
   Custom Hook: useFetchProducts
   -----------------------------
   Fetches product list from API
-  Used inside ProductList component
 */
 
 const useFetchProducts = () => {
@@ -13,9 +12,11 @@ const useFetchProducts = () => {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    let isMounted = true;
+    const controller = new AbortController();
 
-    fetch("https://dummyjson.com/products?limit=100")
+    fetch("https://dummyjson.com/products?limit=100", {
+      signal: controller.signal,
+    })
       .then((res) => {
         if (!res.ok) {
           throw new Error("Failed to fetch products");
@@ -23,24 +24,19 @@ const useFetchProducts = () => {
         return res.json();
       })
       .then((data) => {
-        if (isMounted) {
-          setProducts(data.products);
-        }
+        setProducts(data.products);
       })
-      .catch(() => {
-        if (isMounted) {
+      .catch((err) => {
+        if (err.name !== "AbortError") {
           setError("Unable to load products. Please try again later.");
         }
       })
       .finally(() => {
-        if (isMounted) {
-          setLoading(false);
-        }
+        setLoading(false);
       });
 
-    // Cleanup function
     return () => {
-      isMounted = false;
+      controller.abort();
     };
   }, []);
 
