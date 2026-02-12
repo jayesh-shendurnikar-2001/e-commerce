@@ -34,6 +34,7 @@ const cartSlice = createSlice({
       );
     },
 
+    // Increase quantity
     increaseQty: (state, action) => {
       const item = state.items.find(
         (item) => item.id === action.payload
@@ -42,6 +43,8 @@ const cartSlice = createSlice({
         item.quantity += 1;
       }
     },
+
+    // Decrease quantity (minimum 1)
     decreaseQty: (state, action) => {
       const item = state.items.find(
         (item) => item.id === action.payload
@@ -56,6 +59,10 @@ const cartSlice = createSlice({
       state.items = [];
     },
 
+    // Set search text (Redux search feature)
+    setSearch: (state, action) => {
+      state.search = action.payload;
+    },
   },
 });
 
@@ -65,6 +72,7 @@ export const {
   increaseQty,
   decreaseQty,
   clearCart,
+  setSearch,
 } = cartSlice.actions;
 
 export default cartSlice.reducer;
