@@ -1,70 +1,84 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { selectCartCount } from "../features/cart/cartSelectors";
+import { setSearch } from "../features/cart/cartSlice";
 
 function Header() {
   const [menu, setMenu] = useState(false);
+  const dispatch = useDispatch();
+  const cartCount = useSelector(selectCartCount);
+
+  const handleSearch = (e) => {
+    dispatch(setSearch(e.target.value));
+  };
 
   return (
-    <div className="bg-emerald-300 p-4">
-      {/* Top Section */}
-      <div className="flex items-center justify-between md:justify-evenly">
-        <h1 className="text-2xl font-bold">
-          <Link to="/">MyShop</Link>
-        </h1>
+    <header className="bg-emerald-400 shadow-md">
+      <div className="max-w-7xl mx-auto px-4 py-4">
+        
+        {/* Top Section */}
+        <div className="flex items-center justify-between">
+          
+          {/* Logo */}
+          <h1 className="text-2xl font-bold text-white">
+            <Link to="/">MyShop</Link>
+          </h1>
 
-        <input
-          width="55%"
-          type="text"
-          placeholder="Search Products Name.."
-          className="hidden md:block border rounded-full px-4 py-1 text-center w-[15%]"
-        />
-
-        {/* Mobile Button */}
-        <button className="md:hidden text-2xl transition-all duration-300 ease-in-out" onClick={() => setMenu(!menu)}>
-        {menu ? "✕" : "☰"}
-        </button>
-
-        {/* Desktop Menu */}
-        <ul className="hidden md:flex gap-5 font-medium">
-          <li
-            className=" relative
-                after:absolute after:left-0 after:-bottom-1
-                after:h-[2px] after:w-0 after:bg-black
-                after:transition-all after:duration-300
-                hover:after:w-full hover:text-black"
-          >
-            <Link to="/">Home</Link>
-          </li>
-          <li
-            className=" relative
-                after:absolute after:left-0 after:-bottom-1
-                after:h-[2px] after:w-0 after:bg-black
-                after:transition-all after:duration-300
-                hover:after:w-full hover:text-black"
-          >
-            <Link to="/cart">Cart</Link>
-          </li>
-        </ul>
-      </div>
-
-      {/* Mobile Menu */}
-      {menu && (
-        <div className="flex flex-col gap-4 mt-4 md:hidden items-center font-medium transition-all duration-300 ease-in-out">
+          {/* Desktop Search */}
           <input
-            width="55%"
             type="text"
-            placeholder="Search Products Name.."
-            className="md:block border rounded-full px-4 py-1 text-center w-[75%]"
+            onChange={handleSearch}
+            placeholder="Search products..."
+            className="hidden md:block border rounded-full px-4 py-2 w-1/3 text-center focus:outline-none"
           />
-          <Link to="/" onClick={() => setMenu(false)}>
-            Home
-          </Link>
-          <Link to="/cart" onClick={() => setMenu(false)}>
-            Cart
-          </Link>
+
+          {/* Desktop Menu */}
+          <ul className="hidden md:flex items-center gap-6 font-medium text-white">
+            <li className="hover:text-black transition">
+              <Link to="/">Home</Link>
+            </li>
+
+            <li className="relative hover:text-black transition">
+              <Link to="/cart">
+                Cart
+                ({cartCount })
+              </Link>
+            </li>
+          </ul>
+
+          {/* Mobile Menu Button */}
+          <button
+            className="md:hidden text-2xl text-white"
+            onClick={() => setMenu(!menu)}
+          >
+            {menu ? "✕" : "☰"}
+          </button>
         </div>
-      )}
-    </div>
+
+        {/* Mobile Menu */}
+        {menu && (
+          <div className="flex flex-col gap-4 mt-4 md:hidden items-center font-medium text-white">
+            
+            <input
+              type="text"
+              onChange={handleSearch}
+              placeholder="Search products..."
+              className="border rounded-full px-4 py-2 w-full text-center text-black"
+            />
+
+            <Link to="/" onClick={() => setMenu(false)}>
+              Home
+            </Link>
+
+            <Link to="/cart" onClick={() => setMenu(false)}>
+              Cart ({cartCount})
+            </Link>
+          </div>
+        )}
+
+      </div>
+    </header>
   );
 }
 
