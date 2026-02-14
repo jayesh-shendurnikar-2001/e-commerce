@@ -5,10 +5,14 @@ import { selectCartCount } from "../features/cart/cartSelectors";
 import { setSearch } from "../features/cart/cartSlice";
 
 function Header() {
+    // Local state to toggle mobile menu open/close
   const [menu, setMenu] = useState(false);
+    // Redux dispatch function to send actions
   const dispatch = useDispatch();
+  // Get total cart count from Redux store
   const cartCount = useSelector(selectCartCount);
 
+   // dispatch function to send actions to Redux
   const handleSearch = (e) => {
     dispatch(setSearch(e.target.value));
   };

@@ -1,25 +1,37 @@
 import { useEffect, useState } from "react";
+
+// Import hook to get route parameter (product id)
 import { useParams } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { addToCart } from "../features/cart/cartSlice";
 
 function ProductDetail() {
+  // Get product id from URL (example: /product/5)
   const { id } = useParams();
+
+  // Redux dispatch function
   const dispatch = useDispatch();
 
+  // Local state to store fetched product data
   const [product, setProduct] = useState(null);
+
+  // Local state to store error message
   const [error, setError] = useState(null);
 
+  // Fetch product details when component mounts or id changes
   useEffect(() => {
     fetch(`https://dummyjson.com/products/${id}`)
       .then((res) => {
+        // If response not OK, throw error
         if (!res.ok) throw new Error("Product not found");
         return res.json();
       })
+      // Save product data into state
       .then(setProduct)
       .catch(() => setError("Unable to fetch product details"));
-  }, [id]);
+  }, [id]); // Dependency array ensures refetch if id changes
 
+  // If there is an error, show error message
   if (error)
     return (
       <div className="min-h-[60vh] flex items-center justify-center">
@@ -27,19 +39,17 @@ function ProductDetail() {
       </div>
     );
 
-    if (!product)
-      return (
-        <div className="min-h-[60vh] flex items-center justify-center">
-          <div className="w-10 h-10 border-4 border-emerald-500 border-t-transparent rounded-full animate-spin"></div>
-        </div>
-      );
-    
+  // If product is still loading, show spinner
+  if (!product)
+    return (
+      <div className="min-h-[60vh] flex items-center justify-center">
+        <div className="w-10 h-10 border-4 border-emerald-500 border-t-transparent rounded-full animate-spin"></div>
+      </div>
+    );
 
   return (
     <div className="max-w-6xl mx-auto px-4 py-10">
-      
       <div className="flex flex-col md:flex-row items-center gap-10">
-        
         {/* Image Section */}
         <div className="w-full md:w-1/2 flex justify-center">
           <img
@@ -71,7 +81,6 @@ function ProductDetail() {
             Add to Cart
           </button>
         </div>
-
       </div>
     </div>
   );

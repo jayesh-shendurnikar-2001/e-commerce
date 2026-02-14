@@ -11,17 +11,21 @@ const cartSlice = createSlice({
   reducers: {
     // Add product to cart
     addToCart: (state, action) => {
+      // Get product object from dispatched action
       const product = action.payload;
 
-      const existingItem = state.items.find(
-        (item) => item.id === product.id
-      );
+      // Check if product already exists in cart
+      const existingItem = state.items.find((item) => item.id === product.id);
 
+      // If product already exists in cart
       if (existingItem) {
+        // Increase quantity by 1
         existingItem.quantity += 1;
       } else {
+        // If product does not exist in cart
+        // Add new product with initial quantity = 1
         state.items.push({
-          ...product,
+          ...product, // Spread product properties (id, title, price, etc.)
           quantity: 1,
         });
       }
@@ -29,16 +33,12 @@ const cartSlice = createSlice({
 
     // Remove product from cart
     removeFromCart: (state, action) => {
-      state.items = state.items.filter(
-        (item) => item.id !== action.payload
-      );
+      state.items = state.items.filter((item) => item.id !== action.payload);
     },
 
     // Increase quantity
     increaseQty: (state, action) => {
-      const item = state.items.find(
-        (item) => item.id === action.payload
-      );
+      const item = state.items.find((item) => item.id === action.payload);
       if (item) {
         item.quantity += 1;
       }
@@ -46,9 +46,7 @@ const cartSlice = createSlice({
 
     // Decrease quantity (minimum 1)
     decreaseQty: (state, action) => {
-      const item = state.items.find(
-        (item) => item.id === action.payload
-      );
+      const item = state.items.find((item) => item.id === action.payload);
       if (item && item.quantity > 1) {
         item.quantity -= 1;
       }

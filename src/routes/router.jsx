@@ -2,12 +2,20 @@ import { createBrowserRouter } from "react-router-dom";
 import { lazy, Suspense } from "react";
 import App from "../App";
 
+/*
+  Lazy load all page components.
+  This improves performance by loading pages only when needed.
+*/
 const Home = lazy(() => import("../pages/Home"));
 const ProductDetail = lazy(() => import("../pages/ProductDetail"));
 const Cart = lazy(() => import("../pages/Cart"));
 const Checkout = lazy(() => import("../pages/Checkout"));
 const NotFound = lazy(() => import("../pages/NotFound"));
 
+/*
+  Loader component
+  This will show while lazy-loaded components are being downloaded.
+*/
 const Loader = () => {
   return (
     <div className="flex justify-center items-center min-h-[40vh]">
@@ -20,10 +28,18 @@ const Loader = () => {
   );
 };
 
+/*
+  Create application routes
+*/
 const router = createBrowserRouter([
   {
     path: "/",
     element: <App />,
+
+    /*
+      errorElement will render when route is invalid
+      Wrapped with Suspense because NotFound is lazy loaded
+    */
     errorElement: (
       <Suspense fallback={<Loader />}>
         <NotFound />

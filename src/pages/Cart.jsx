@@ -7,15 +7,21 @@ import {
 } from "../features/cart/cartSelectors";
 
 function Cart() {
+  // Get all cart items from Redux store
   const items = useSelector(selectCartItems);
+
+  // Get total cart price from Redux store
   const total = useSelector(selectCartTotal);
 
+    // If cart is empty, show empty message
   if (items.length === 0) {
     return (
       <div className="min-h-[60vh] flex flex-col items-center justify-center">
         <h2 className="text-2xl font-semibold text-gray-700">
           Your cart is empty 🛒
         </h2>
+
+          {/* Button to go back to shopping page */}
         <Link
           to="/"
           className="mt-4 bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition"
@@ -26,6 +32,7 @@ function Cart() {
     );
   }
 
+   // If cart has items
   return (
     <div className="max-w-6xl mx-auto px-4 py-8">
       

@@ -1,11 +1,15 @@
 import { useDispatch } from "react-redux";
+// Import cart actions from cartSlice
 import {
   increaseQty,
   decreaseQty,
   removeFromCart,
 } from "../features/cart/cartSlice";
 
+// CartItem component receives single cart item as prop
 function CartItem({ item }) {
+
+    // dispatch function to send actions to Redux
   const dispatch = useDispatch();
 
   return (
