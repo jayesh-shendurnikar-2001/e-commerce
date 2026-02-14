@@ -39,42 +39,39 @@ https://github.com/jayesh-shendurnikar-2001/e-commerce.git
 - **React Toastify**
 - **DummyJSON API** (for product data)
 
----
-
 ## 📂 Project Structure
 
+```bash
 src/
-│
 ├── app/
-│ └── store.js
+│   └── store.js
 │
 ├── components/
-│ ├── Header.jsx
-│ ├── ProductItem.jsx
-│ └── CartItem.jsx
+│   ├── Header.jsx
+│   ├── ProductItem.jsx
+│   └── CartItem.jsx
 │
 ├── features/
-│ └── cart/
-│ ├── cartSlice.js
-│ └── cartSelectors.js
+│   └── cart/
+│       ├── cartSlice.js
+│       └── cartSelectors.js
 │
 ├── hooks/
-│ └── useFetchProducts.js
+│   └── useFetchProducts.js
 │
 ├── pages/
-│ ├── Home.jsx
-│ ├── ProductList.jsx
-│ ├── ProductDetail.jsx
-│ ├── Cart.jsx
-│ ├── Checkout.jsx
-│ └── NotFound.jsx
+│   ├── Home.jsx
+│   ├── ProductList.jsx
+│   ├── ProductDetail.jsx
+│   ├── Cart.jsx
+│   ├── Checkout.jsx
+│   └── NotFound.jsx
 │
 ├── routes/
-│ └── router.jsx
+│   └── router.jsx
 │
 └── main.jsx
-
----
+```
 
 ## ⚙️ Installation & Setup
 
